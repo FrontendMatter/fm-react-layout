@@ -6,21 +6,20 @@ import typescript from "@rollup/plugin-typescript";
 import dts from "rollup-plugin-dts";
 import postcss from "rollup-plugin-postcss";
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
-
-import pkg from "./package.json" assert { type: 'json' };
+import livereload from "rollup-plugin-livereload";
 
 export default [
 	{
 		input: 'src/index.ts',
 		output: [
 			{
-				file: pkg.main,
+				file: "dist/cjs/bundle.js",
 				format: 'cjs',
 				sourcemap: true,
-        name: 'fm-react-layout'
+        		name: 'fm-react-layout'
 			},
 			{
-				file: pkg.module,
+				file: "dist/esm/bundle.js",
 				format: "esm",
 				sourcemap: true,
 			},
@@ -35,13 +34,14 @@ export default [
 			peerDepsExternal(),
 			resolve(),
 			commonjs(),
-			typescript({ tsconfig: "./tsconfig.json" }),
+			typescript({ tsconfig: "./tsconfig.json", exclude: ['**/demos'] }),
 			postcss(),
-			terser()
-		]
+			terser(),
+			livereload('dist'),
+		],
 	},
 	{
-		input: "dist/esm/types/index.d.ts",
+		input: "dist/esm/types/src/index.d.ts",
 		output: [{ file: "dist/index.d.ts", format: "esm" }],
 		plugins: [dts()],
 		external: [/\.(css|less|scss)$/],
