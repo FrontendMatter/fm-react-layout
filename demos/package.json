@@ -24,6 +24,8 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.3",
     "typescript": "^5.0.2",
+    "material-design-kit": "^2.2.1",
+    "dom-factory": "^1.1.0",
     "vite": "^4.4.5"
   }
 }
