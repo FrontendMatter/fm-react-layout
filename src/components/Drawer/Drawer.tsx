@@ -61,7 +61,6 @@ const Drawer = forwardRef((props: DrawerProps, ref) => {
         setShow(false)
     }
 
-
     useEffect(() => {
         const drawerNode = document.querySelector('.js-mdk-drawer')
         console.log("drawer")
@@ -94,6 +93,7 @@ const Drawer = forwardRef((props: DrawerProps, ref) => {
         console.log("show useEffect")
         console.log(drawer)
         if(drawer) {
+            console.log(`calling: ${show ? 'open' : 'close'}`)
             drawer[show ? 'open' : 'close']();
         }
     }, [show]);
