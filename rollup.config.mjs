@@ -16,7 +16,7 @@ export default [
 				file: "dist/cjs/bundle.js",
 				format: 'cjs',
 				sourcemap: true,
-        		name: 'fm-react-layout'
+        name: 'fm-react-layout'
 			},
 			{
 				file: "dist/esm/bundle.js",
@@ -34,7 +34,7 @@ export default [
 			peerDepsExternal(),
 			resolve(),
 			commonjs(),
-			typescript({ tsconfig: "./tsconfig.json", exclude: ['**/demos'] }),
+			typescript({ tsconfig: "./tsconfig.json", exclude: ['demos/**'], sourceMap: true }),
 			postcss({
 				extract: true
 			}),
@@ -43,7 +43,7 @@ export default [
 		],
 	},
 	{
-		input: "dist/esm/types/src/index.d.ts",
+		input: "dist/esm/types/index.d.ts",
 		output: [{ file: "dist/index.d.ts", format: "esm" }],
 		plugins: [dts()],
 		external: [/\.(css|less|scss)$/],
