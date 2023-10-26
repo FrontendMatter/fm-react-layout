@@ -1,0 +1,12 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.inner {
+    margin: 0 auto; /* Horizontal centering using margin */
+    text-align: center; /* Optional: Center text within the div */
+}

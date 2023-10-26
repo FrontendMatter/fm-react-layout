@@ -1,24 +1,24 @@
+import {
+    createBrowserRouter,
+    RouterProvider,
+} from "react-router-dom";
 import './App.css'
-import {Drawer} from 'fm-react-layout'
-import {useRef} from "react";
+import DrawerLeft from "./pages/drawer-left";
+import Home from "./pages/home";
 
+const router = createBrowserRouter([
+    {
+        path: "/",
+        element: <Home />,
+    },
+    {
+        path: "/drawer-left",
+        element: <DrawerLeft />,
+    },
+]);
 function App() {
-    const childRef = useRef(null);
     return (
-        <>
-            <div>
-                <button onClick={() => childRef?.current?.changeVisibility()}>
-                    Open/Close Drawer
-                </button>
-                <Drawer
-                    ref={childRef}
-                    opened={false}
-                >
-                    <div>I am the child</div>
-                </Drawer>
-            </div>
-
-        </>
+        <RouterProvider router={router} />
     )
 }
 

@@ -1,8 +1,8 @@
-import React, {forwardRef, useRef, useEffect, useImperativeHandle, useState, useCallback} from "react";
-import {DrawerProps} from "./Drawer.types";
+import React, { forwardRef, useRef, useEffect, useImperativeHandle, useState, useCallback } from "react";
+import { DrawerProps } from "./Drawer.types";
 import 'material-design-kit/src/drawer/drawer.scss';
-import {drawerComponent} from 'material-design-kit';
-import {handler} from 'dom-factory';
+import { drawerComponent } from 'material-design-kit';
+import { handler } from 'dom-factory';
 handler.register('mdk-drawer', drawerComponent);
 
 const EVENT_TOGGLE = 'fm::toggle::drawer';
@@ -12,12 +12,12 @@ const EVENT_UPGRADED = 'domfactory-component-upgraded';
 
 const Drawer = forwardRef((props: DrawerProps, ref) => {
   const {
-    children, 
-    id = "default-drawer", 
-    align = "start", 
-    persistent = false, 
-    opened = false, 
-    classes = null, 
+    children,
+    id = "default-drawer",
+    align = "start",
+    persistent = false,
+    opened = false,
+    classes = null,
     contentClass = null
   } = props;
 
@@ -25,7 +25,7 @@ const Drawer = forwardRef((props: DrawerProps, ref) => {
   const [show, setShow] = useState(opened);
 
   useImperativeHandle(ref, () => ({
-    changeVisibility () {
+    changeVisibility() {
       setShow(prevState => !prevState)
     }
   }))
@@ -47,7 +47,7 @@ const Drawer = forwardRef((props: DrawerProps, ref) => {
   const onChangeHandler = () => {
     const drawerNode = (element.current as any)
     const drawer = drawerNode?.mdkDrawer;
-    if(drawer) {
+    if (drawer) {
       setShow(drawer.opened);
     }
   }
@@ -57,7 +57,7 @@ const Drawer = forwardRef((props: DrawerProps, ref) => {
 
   useEffect(() => {
     const drawerNode = (element.current as any)
-    
+
     if (drawerNode) {
       drawerNode?.addEventListener(EVENT_TOGGLE, handleToggleEvt);
       drawerNode?.addEventListener(EVENT_CLOSE, handleCloseEvt);
@@ -78,7 +78,7 @@ const Drawer = forwardRef((props: DrawerProps, ref) => {
   useEffect(() => {
     const drawerNode = (element.current as any)
     const drawer = drawerNode?.mdkDrawer;
-    if(drawer) {
+    if (drawer) {
       drawer[show ? 'open' : 'close']();
       drawer.align = align;
       drawer.persistent = persistent;
@@ -86,10 +86,10 @@ const Drawer = forwardRef((props: DrawerProps, ref) => {
   }, [show, align, persistent]);
 
   return (
-    <div 
-      ref={element} 
-      id={id} 
-      data-align={align} 
+    <div
+      ref={element}
+      id={id}
+      data-align={align}
       className="mdk-drawer js-mdk-drawer"
     >
       <div className={`${!!contentClass ? contentClass : ""} mdk-drawer__content`}>
