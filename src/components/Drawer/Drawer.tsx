@@ -1,122 +1,102 @@
-import React, {forwardRef, useEffect, useImperativeHandle, useState} from "react";
-
+import React, {forwardRef, useRef, useEffect, useImperativeHandle, useState, useCallback} from "react";
 import {DrawerProps} from "./Drawer.types";
-import "./Drawer.css";
-//@ts-ignore
+import 'material-design-kit/src/drawer/drawer.scss';
 import {drawerComponent} from 'material-design-kit';
-//@ts-ignore
 import {handler} from 'dom-factory';
+handler.register('mdk-drawer', drawerComponent);
 
-// Events we listen to on $root
 const EVENT_TOGGLE = 'fm::toggle::drawer';
 const EVENT_CLOSE = 'fm::close::drawer';
+const EVENT_CHANGE = 'mdk-drawer-change';
+const EVENT_UPGRADED = 'domfactory-component-upgraded';
 
 const Drawer = forwardRef((props: DrawerProps, ref) => {
-    const {
-        children,
-        id = "default-drawer",
-        align = "start",
-        persistent = false,
-        opened = false,
-        classes = null,
-        contentClass = null,
-    } = props;
-    const [show, setShow] = useState(opened);
-    console.log(opened, show)
-    console.log(document.querySelector('.js-mdk-drawer')?.mdkDrawer)
+  const {
+    children, 
+    id = "default-drawer", 
+    align = "start", 
+    persistent = false, 
+    opened = false, 
+    classes = null, 
+    contentClass = null
+  } = props;
 
-    useImperativeHandle(ref, () => ({
-        changeVisibility () {
-            console.log("using this wow")
-            setShow(prevState => !prevState)
-        }
-    }))
+  const element = useRef<HTMLDivElement>(null);
+  const [show, setShow] = useState(opened);
 
-
-    const onChangeHandler = () => {
-        console.log("onChangeHandler")
-        const drawer = document.querySelector('.js-mdk-drawer')?.mdkDrawer;
-        if(drawer) {
-            setShow(drawer.opened);
-        }
+  useImperativeHandle(ref, () => ({
+    changeVisibility () {
+      setShow(prevState => !prevState)
     }
-    const onInitHandler = () => {
-        console.log("onInitHandler")
-        if (opened) setShow(true)
+  }))
+
+  const handleToggleEvt = useCallback((target: string) => {
+    if (!!target && target !== id) {
+      return
     }
+    setShow(prevState => !prevState)
+  }, [id]);
 
-    const handleToggleEvt = (target) => {
-        console.log("handleToggleEvt")
-        if (!!target && target !== id) {
-            return
-        }
-        setShow(prevState => !prevState)
+  const handleCloseEvt = useCallback((target: string) => {
+    if (!!target && target !== id) {
+      return
     }
+    setShow(false)
+  }, [id]);
 
-    const handleCloseEvt = (target) => {
-        console.log("handleCloseEvt")
-        if (!!target && target !== id) {
-            return
-        }
-        setShow(false)
+  const onChangeHandler = () => {
+    const drawerNode = (element.current as any)
+    const drawer = drawerNode?.mdkDrawer;
+    if(drawer) {
+      setShow(drawer.opened);
     }
+  }
+  const onInitHandler = () => {
+    if (opened) setShow(true)
+  }
 
+  useEffect(() => {
+    const drawerNode = (element.current as any)
+    
+    if (drawerNode) {
+      drawerNode?.addEventListener(EVENT_TOGGLE, handleToggleEvt);
+      drawerNode?.addEventListener(EVENT_CLOSE, handleCloseEvt);
+      drawerNode?.addEventListener(EVENT_CHANGE, onChangeHandler);
+      drawerNode?.addEventListener(EVENT_UPGRADED, onInitHandler);
+      handler.upgradeElement(drawerNode, 'mdk-drawer');
 
-    useEffect(() => {
-        const drawerNode = document.querySelector('.js-mdk-drawer')
-        console.log("drawer")
-        console.log(drawerNode?.mdkDrawer);
+      return () => {
+        handler.downgradeElement(drawerNode, 'mdk-drawer');
+        drawerNode?.removeEventListener(EVENT_CHANGE, onChangeHandler);
+        drawerNode?.removeEventListener(EVENT_UPGRADED, onInitHandler);
+        drawerNode?.removeEventListener(EVENT_TOGGLE, handleToggleEvt);
+        drawerNode?.removeEventListener(EVENT_CLOSE, handleCloseEvt);
+      }
+    }
+  }, []);
 
-        handler.register('mdk-drawer', drawerComponent);
+  useEffect(() => {
+    const drawerNode = (element.current as any)
+    const drawer = drawerNode?.mdkDrawer;
+    if(drawer) {
+      drawer[show ? 'open' : 'close']();
+      drawer.align = align;
+      drawer.persistent = persistent;
+    }
+  }, [show, align, persistent]);
 
-        drawerNode?.addEventListener(EVENT_TOGGLE, handleToggleEvt)
-        drawerNode?.addEventListener(EVENT_CLOSE, handleCloseEvt)
-
-        drawerNode?.addEventListener('mdk-drawer-change', () => onChangeHandler())
-        drawerNode?.addEventListener('domfactory-component-upgraded', () => onInitHandler())
-
-        handler.upgradeElement(drawerNode, 'mdk-drawer')
-
-        return () => {
-            const drawerNode = document.querySelector('.js-mdk-drawer')
-            handler.downgradeElement(drawerNode, 'mdk-drawer')
-            drawerNode?.removeEventListener('mdk-drawer-change', () =>
-                onChangeHandler()
-            )
-            drawerNode?.removeEventListener('domfactory-component-upgraded', () =>
-                onInitHandler()
-            )
-        }
-    }, []);
-
-    useEffect(() => {
-        const drawer = document.querySelector('.js-mdk-drawer')?.mdkDrawer;
-        console.log("show useEffect")
-        console.log(drawer)
-        if(drawer) {
-            drawer[show ? 'open' : 'close']();
-        }
-    }, [show]);
-
-    useEffect(() => {
-        const drawer = document.querySelector('.js-mdk-drawer')?.mdkDrawer;
-        drawer.align = align;
-    }, [align])
-
-    return (
-        <>
-            <div
-                id={id}
-                data-align={align}
-                className="mdk-drawer js-mdk-drawer"
-            >
-                <div className={`${!!contentClass ? contentClass : ""} mdk-drawer__content`}>
-                    {children}
-                </div>
-            </div>
-        </>
-    );
+  return (
+    <div 
+      ref={element} 
+      id={id} 
+      data-align={align} 
+      className="mdk-drawer js-mdk-drawer"
+    >
+      <div className={`${!!contentClass ? contentClass : ""} mdk-drawer__content`}>
+        {children}
+      </div>
+    </div>
+  );
 })
-
 
 export default Drawer;
