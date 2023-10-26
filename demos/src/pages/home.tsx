@@ -6,7 +6,8 @@ const Home = () => {
             <div>
                 This is the Home Page.
             </div>
-            <Link to={'/drawer-left'}>Go to Drawer example</Link>
+            <Link to={'/drawer-left'}>Example of a Drawer Left</Link>
+            <Link to={'/drawer-right'}>Example of a Drawer Right</Link>
         </div>
     );
 }

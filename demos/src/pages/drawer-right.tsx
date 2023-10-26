@@ -3,7 +3,7 @@ import {Drawer} from "fm-react-layout";
 import './styles/drawer.css';
 import {Link} from "react-router-dom";
 
-const DrawerLeft = () => {
+const DrawerRight = () => {
     const childRef = useRef<{changeVisibility: () => void}>(null);
 
     return (
@@ -15,6 +15,7 @@ const DrawerLeft = () => {
             <Drawer
                 ref={childRef}
                 opened={false}
+                align="end"
             >
                 <div className="content">
                     <div>I am the child</div>
@@ -25,4 +26,4 @@ const DrawerLeft = () => {
     )
 }
 
-export default DrawerLeft
+export default DrawerRight
