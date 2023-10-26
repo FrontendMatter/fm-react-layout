@@ -41,12 +41,13 @@
     "rollup-plugin-postcss": "^4.0.2",
     "sass": "^1.69.4",
     "tslib": "^2.6.2",
-    "typescript": "^5.2.2"
+    "typescript": "^5.2.2",
+    "perfect-scrollbar": "^1.5.5"
   },
   "peerDependencies": {
-    "react": "^18.2.0",
-    "material-design-kit": "^2.2.1",
     "dom-factory": "^1.1.0",
+    "material-design-kit": "^2.2.1",
+    "react": "^18.2.0",
     "react-dom": "^18.2.0"
   }
 }

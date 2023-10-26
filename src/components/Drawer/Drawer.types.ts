@@ -6,5 +6,4 @@ export interface DrawerProps {
   opened: boolean,
   classes?: string,
   contentClass?: string,
-  changeVisibility?: (prevState: boolean) => boolean,
 }
