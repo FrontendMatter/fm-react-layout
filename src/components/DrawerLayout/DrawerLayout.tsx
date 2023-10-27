@@ -8,6 +8,7 @@ handler.register('mdk-drawer-layout', drawerLayoutComponent);
 import Drawer from "../Drawer";
 import {DrawerLayoutProps} from "./DrawerLayout.types";
 import PerfectScrollbar from "../PerfectScrollbar";
+import drawer from "../Drawer";
 
 const EVENT_UPGRADED = 'domfactory-component-upgraded';
 
@@ -43,7 +44,9 @@ const DrawerLayout = forwardRef((props: DrawerLayoutProps, ref) => {
     useEffect(() => {
         const drawerLayoutNode = (element.current as any)
         const drawerLayout = drawerLayoutNode?.mdkDrawerLayout;
-        drawerLayout.fullbleed = fullbleed;
+        if(!!drawerLayout){
+            drawerLayout.fullbleed = fullbleed;
+        }
 
         drawerLayoutNode?.addEventListener(EVENT_UPGRADED, updateAttributes)
         handler.upgradeElement(drawerLayoutNode, 'mdk-drawer-layout');
