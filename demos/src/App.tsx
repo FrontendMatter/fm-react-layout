@@ -7,6 +7,7 @@ import DrawerLeft from "./pages/drawer-left";
 import Home from "./pages/home";
 import DrawerRight from "./pages/drawer-right";
 import BasicDrawerLayout from "./pages/basic-drawer-layout";
+import ScrollingHeader from "./pages/scrolling-header";
 
 const router = createBrowserRouter([
     {
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
     {
         path: "/drawer-layout",
         element: <BasicDrawerLayout />,
+    },
+    {
+        path: "/scrolling-header",
+        element: <ScrollingHeader />,
     },
 ]);
 function App() {

@@ -9,6 +9,7 @@ const Home = () => {
             <Link to={'/drawer-left'}>Example of a Drawer Left</Link>
             <Link to={'/drawer-right'}>Example of a Drawer Right</Link>
             <Link to={'/drawer-layout'}>Example of a Drawer Layout</Link>
+            <Link to={'/scrolling-header'}>Example of a Scrolling Header</Link>
         </div>
     );
 }
