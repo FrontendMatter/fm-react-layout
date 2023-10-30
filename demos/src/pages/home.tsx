@@ -2,7 +2,7 @@ import {Link} from "react-router-dom";
 import "./styles/home.css";
 const Home = () => {
     return (
-        <div className="container">
+        <div className="home__container">
             <div>
                 This is the Home Page.
             </div>

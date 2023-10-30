@@ -2,7 +2,7 @@ import {
     createBrowserRouter,
     RouterProvider,
 } from "react-router-dom";
-import './App.css'
+
 import DrawerLeft from "./pages/drawer-left";
 import Home from "./pages/home";
 import DrawerRight from "./pages/drawer-right";

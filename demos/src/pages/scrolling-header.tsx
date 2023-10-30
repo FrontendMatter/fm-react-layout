@@ -3,19 +3,19 @@ import SampleContent from "./sample-content";
 import "./styles/header.css";
 
 const ScrollingHeader = () => {
-    return (
+  return (
+    <div>
+      <Header headerContentClass="headerContent">
         <div>
-            <Header headerContentClass="headerContent">
-                <div>
-                    Header data baby.
-                </div>
-            </Header>
-            <SampleContent/>
-            <SampleContent/>
-            <SampleContent/>
-
+          Header data baby.
         </div>
-    )
+      </Header>
+
+      <SampleContent/>
+      <SampleContent/>
+      <SampleContent/>
+    </div>
+  )
 }
 
 export default ScrollingHeader;
