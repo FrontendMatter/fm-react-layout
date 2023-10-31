@@ -2,20 +2,17 @@ import {Header} from "fm-react-layout";
 import SampleContent from "./sample-content";
 import "./styles/header.css";
 import Container from "react-bootstrap/Container";
-import {Link} from "react-router-dom";
+import HeaderContent from "./header-content";
+import HomeButton from "./home-button";
 
 const ScrollingHeader = () => {
     return (
         <div>
             <Header headerContentClass="bg-primary">
-                <Container>
-                    Header data baby.
-                </Container>
+                <HeaderContent/>
             </Header>
             <Container>
-                <Link to="/">Home</Link>
-                <SampleContent/>
-                <SampleContent/>
+                <HomeButton/>
                 <SampleContent/>
             </Container>
         </div>

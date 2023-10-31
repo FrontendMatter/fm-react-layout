@@ -1,8 +1,9 @@
 import {Header} from "fm-react-layout";
 import Container from "react-bootstrap/Container";
-import {Link} from "react-router-dom";
 import SampleContent from "./sample-content";
 import "./styles/header.css";
+import HeaderContent from "./header-content";
+import HomeButton from "./home-button";
 
 const FixedHeader = () => {
     return (
@@ -13,14 +14,10 @@ const FixedHeader = () => {
                 condenses
                 classes="bg-primary"
             >
-                <div className="headerContent bg-primary">
-                    Header data baby.
-                </div>
+                <HeaderContent/>
             </Header>
             <Container>
-                <Link to="/">Home</Link>
-                <SampleContent/>
-                <SampleContent/>
+                <HomeButton/>
                 <SampleContent/>
             </Container>
         </div>
