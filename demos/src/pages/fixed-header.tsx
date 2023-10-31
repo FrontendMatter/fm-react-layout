@@ -1,16 +1,21 @@
 import {Header} from "fm-react-layout";
-import SampleContent from "./sample-content";
-import "./styles/header.css";
 import Container from "react-bootstrap/Container";
 import {Link} from "react-router-dom";
+import SampleContent from "./sample-content";
+import "./styles/header.css";
 
-const ScrollingHeader = () => {
+const FixedHeader = () => {
     return (
         <div>
-            <Header headerContentClass="bg-primary">
-                <Container>
+            <Header
+                fixed
+                effects="waterfall"
+                condenses
+                classes="bg-primary"
+            >
+                <div className="headerContent bg-primary">
                     Header data baby.
-                </Container>
+                </div>
             </Header>
             <Container>
                 <Link to="/">Home</Link>
@@ -22,4 +27,4 @@ const ScrollingHeader = () => {
     )
 }
 
-export default ScrollingHeader;
+export default FixedHeader;

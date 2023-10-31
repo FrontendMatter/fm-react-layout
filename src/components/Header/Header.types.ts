@@ -7,4 +7,5 @@ export interface HeaderTypes {
     effects?: string | string[];
     headerImage?: string | null;
     headerContentClass?: string;
+    classes?: string;
 }

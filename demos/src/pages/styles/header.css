@@ -1,10 +1,6 @@
 .headerContent {
     display: flex;
     align-items: center;
-    background: blanchedalmond;
-    color: #242424;
-}
-
-.headerContent > * {
-    color: #242424;
+    justify-content: center;
+    height: 100px;
 }

@@ -8,6 +8,7 @@ import Home from "./pages/home";
 import DrawerRight from "./pages/drawer-right";
 import BasicDrawerLayout from "./pages/basic-drawer-layout";
 import ScrollingHeader from "./pages/scrolling-header";
+import FixedHeader from "./pages/fixed-header";
 
 const router = createBrowserRouter([
     {
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
     {
         path: "/scrolling-header",
         element: <ScrollingHeader />,
+    },
+    {
+        path: "/fixed-header",
+        element: <FixedHeader />,
     },
 ]);
 function App() {

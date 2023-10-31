@@ -11,14 +11,15 @@ const EVENT_UPGRADED = 'domfactory-component-upgraded';
 const Header = (props: HeaderTypes) => {
     const {
         children,
-        fixed = true,
+        fixed = false,
         disabled = false,
         reveals = false,
         condenses = false,
         effects = null,
         headerImage = null,
-        headerContentClass= ""
-    } = props
+        headerContentClass= "",
+        classes = "",
+    } = props;
 
     const element = useRef<HTMLDivElement>(null);
 
@@ -67,7 +68,7 @@ const Header = (props: HeaderTypes) => {
     return (
         <div
             data-effects={headerEffects}
-            className="mdk-header js-mdk-header"
+            className={`mdk-header js-mdk-header ${classes}`}
             ref={element}
         >
             <div className="mdk-header__bg">
@@ -83,9 +84,7 @@ const Header = (props: HeaderTypes) => {
             <div className={`mdk-header__content ${headerContentClass}`}>
                 {!!children ?
                     children :
-                    <div data-primary>
-
-                    </div>
+                    <div data-primary></div>
                 }
             </div>
         </div>
