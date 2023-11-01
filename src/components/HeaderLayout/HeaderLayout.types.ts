@@ -12,4 +12,5 @@ export interface HeaderLayoutProps {
     contentId?: string;
     contentClass?: string;
     fullbleed?: boolean;
+    hasScrollingRegion?: boolean;
 }

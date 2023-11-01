@@ -27,7 +27,6 @@ export const HeaderLayout = (props: HeaderLayoutProps) => {
 
     const element = useRef<HTMLDivElement>(null);
 
-
     const onInitHandler = () => {
         const headerLayoutNode = (element.current as any)
         const headerLayout = headerLayoutNode.mdkHeaderLayout;
@@ -54,8 +53,6 @@ export const HeaderLayout = (props: HeaderLayoutProps) => {
     }, [fullbleed]);
 
     return (
-
-
         <div
             ref={element}
             className="mdk-header-layout js-mdk-header-layout"

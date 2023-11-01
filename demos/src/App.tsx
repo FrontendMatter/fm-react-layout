@@ -10,6 +10,8 @@ import BasicDrawerLayout from "./pages/basic-drawer-layout";
 import ScrollingHeader from "./pages/scrolling-header";
 import FixedHeader from "./pages/fixed-header";
 import BasicHeaderLayout from "./pages/basic-header-layout";
+import DrawerLayoutWithHeaderLayout from "./pages/drawer-layout-with-header-layout";
+import DrawerLayoutForceNarrow from "./pages/drawer-layout-force-narrow";
 
 const router = createBrowserRouter([
     {
@@ -27,6 +29,14 @@ const router = createBrowserRouter([
     {
         path: "/drawer-layout",
         element: <BasicDrawerLayout />,
+    },
+    {
+        path: "/drawer-layout-with-header-layout",
+        element: <DrawerLayoutWithHeaderLayout />,
+    },
+    {
+        path: "/drawer-layout-force-narrow",
+        element: <DrawerLayoutForceNarrow />,
     },
     {
         path: "/scrolling-header",

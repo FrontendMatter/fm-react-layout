@@ -1,20 +1,21 @@
 import {DrawerLayout} from "fm-react-layout";
-import {useRef} from "react";
 import DrawerContent from "./drawer-content";
+import {useRef} from "react";
 import DrawerLayoutContent from "./drawer-layout-content";
 
-const BasicDrawerLayout = () => {
+export const DrawerLayoutForceNarrow = () => {
     const childRef = useRef<{ changeVisibility: () => void }>(null);
 
     return (
         <DrawerLayout
             ref={childRef}
+            forceNarrow
             renderDrawerContent={() => (
                 <DrawerContent/>
             )}>
-            <DrawerLayoutContent childRef={childRef}/>
+                <DrawerLayoutContent childRef={childRef}/>
         </DrawerLayout>
     );
-}
+};
 
-export default BasicDrawerLayout;
+export default DrawerLayoutForceNarrow;
