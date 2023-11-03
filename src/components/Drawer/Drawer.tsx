@@ -1,6 +1,7 @@
 import React, { forwardRef, useRef, useEffect, useImperativeHandle, useState, useCallback } from "react";
 import { DrawerProps } from "./Drawer.types";
 import 'material-design-kit/src/drawer/drawer.scss';
+import './Drawer.scss';
 import { drawerComponent } from 'material-design-kit';
 import { handler } from 'dom-factory';
 handler.register('mdk-drawer', drawerComponent);
@@ -23,6 +24,7 @@ const Drawer = forwardRef((props: DrawerProps, ref) => {
 
   const element = useRef<HTMLDivElement>(null);
   const [show, setShow] = useState(opened);
+  const [isPersistent, setIsPersistent] = useState(persistent);
 
   useImperativeHandle(ref, () => ({
     changeVisibility() {
@@ -49,10 +51,12 @@ const Drawer = forwardRef((props: DrawerProps, ref) => {
     const drawer = drawerNode?.mdkDrawer;
     if (drawer) {
       setShow(drawer.opened);
+      setIsPersistent(drawer.persistent);
     }
   }
   const onInitHandler = () => {
     if (opened) setShow(true)
+    setIsPersistent(persistent)
   }
 
   useEffect(() => {
@@ -81,9 +85,9 @@ const Drawer = forwardRef((props: DrawerProps, ref) => {
     if (drawer) {
       drawer[show ? 'open' : 'close']();
       drawer.align = align;
-      drawer.persistent = persistent;
+      drawer.persistent = isPersistent;
     }
-  }, [show, align, persistent]);
+  }, [show, align, isPersistent]);
 
   return (
     <div

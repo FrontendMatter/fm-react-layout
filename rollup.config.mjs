@@ -35,9 +35,7 @@ export default [
 			resolve(),
 			commonjs(),
 			typescript({ tsconfig: "./tsconfig.json", exclude: ['demos/**'], sourceMap: true }),
-			postcss({
-				extract: true
-			}),
+			postcss(),
 			terser(),
 			livereload('dist'),
 		],

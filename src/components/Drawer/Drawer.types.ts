@@ -3,7 +3,7 @@ export interface DrawerProps {
   id?: string;
   align?: string;
   persistent?: boolean,
-  opened: boolean,
+  opened?: boolean,
   classes?: string,
   contentClass?: string,
 }

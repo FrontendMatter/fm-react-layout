@@ -24,8 +24,6 @@ const DrawerLayout = forwardRef((props: DrawerLayoutProps, ref) => {
     renderDrawerContent,
     drawerId,
     drawerAlign,
-    drawerPersistent = true,
-    drawerOpened = false,
     drawerClasses,
     drawerContentClass
   } = props;
@@ -82,9 +80,7 @@ const DrawerLayout = forwardRef((props: DrawerLayoutProps, ref) => {
         ref={ref}
         id={drawerId}
         align={drawerAlign}
-        persistent={drawerPersistent}
         contentClass={drawerContentClass}
-        opened={drawerOpened}
         classes={drawerClasses}
       >
         {!!renderDrawerContent && renderDrawerContent()}
