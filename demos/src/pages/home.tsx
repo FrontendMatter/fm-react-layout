@@ -14,6 +14,7 @@ const Home = () => {
             <Link to={'/scrolling-header'}>Example of a Scrolling Header</Link>
             <Link to={'/fixed-header'}>Example of a Fixed Header</Link>
             <Link to={'/header-layout'}>Example of a Header Layout</Link>
+            <Link to={'/sidebar-menu'}>Example of a Sidebar Menu</Link>
         </div>
     );
 }

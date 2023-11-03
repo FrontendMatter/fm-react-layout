@@ -8,6 +8,8 @@ import postcss from "rollup-plugin-postcss";
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 import livereload from "rollup-plugin-livereload";
 
+const isDevelopment = process.env.NODE_ENV === 'development';
+
 export default [
 	{
 		input: 'src/index.ts',
@@ -16,7 +18,7 @@ export default [
 				file: "dist/cjs/bundle.js",
 				format: 'cjs',
 				sourcemap: true,
-        name: 'fm-react-layout'
+		name: 'fm-react-layout'
 			},
 			{
 				file: "dist/esm/bundle.js",
@@ -37,8 +39,8 @@ export default [
 			typescript({ tsconfig: "./tsconfig.json", exclude: ['demos/**'], sourceMap: true }),
 			postcss(),
 			terser(),
-			// livereload('dist'),
-		],
+			isDevelopment && livereload('dist'),
+		].filter(Boolean),
 	},
 	{
 		input: "dist/esm/types/index.d.ts",

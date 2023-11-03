@@ -12,6 +12,7 @@ import FixedHeader from "./pages/fixed-header";
 import BasicHeaderLayout from "./pages/basic-header-layout";
 import DrawerLayoutWithHeaderLayout from "./pages/drawer-layout-with-header-layout";
 import DrawerLayoutForceNarrow from "./pages/drawer-layout-force-narrow";
+import SidebarMenu from "./pages/sidebar-menu";
 
 const router = createBrowserRouter([
     {
@@ -49,6 +50,10 @@ const router = createBrowserRouter([
     {
         path: "/header-layout",
         element: <BasicHeaderLayout />,
+    },
+    {
+        path: "/sidebar-menu",
+        element: <SidebarMenu />,
     },
 ]);
 function App() {
