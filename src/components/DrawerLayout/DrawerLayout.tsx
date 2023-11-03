@@ -12,86 +12,85 @@ import PerfectScrollbar from "../PerfectScrollbar";
 const EVENT_UPGRADED = 'domfactory-component-upgraded';
 
 const DrawerLayout = forwardRef((props: DrawerLayoutProps, ref) => {
-    const {
-        push = true,
-        fullbleed,
-        forceNarrow = false,
-        hasScrollingRegion,
-        responsiveWidth = '992px',
-        contentClass,
-        contentId,
-        children,
-        renderDrawerContent,
-        drawerId,
-        drawerAlign,
-        drawerPersistent = true,
-        drawerOpened = false,
-        drawerClasses,
-        drawerContentClass
-    } = props;
+  const {
+    push = true,
+    fullbleed,
+    forceNarrow = false,
+    hasScrollingRegion,
+    responsiveWidth = '992px',
+    contentClass,
+    contentId,
+    children,
+    renderDrawerContent,
+    drawerId,
+    drawerAlign,
+    drawerPersistent = true,
+    drawerOpened = false,
+    drawerClasses,
+    drawerContentClass
+  } = props;
 
-    const element = useRef<HTMLDivElement>(null);
+  const element = useRef<HTMLDivElement>(null);
 
-    const updateAttributes = () => {
-        const drawerLayoutNode = (element.current as any)
-        const drawerLayout = drawerLayoutNode?.mdkDrawerLayout;
-        drawerLayout.push = push;
-        drawerLayout.fullbleed = fullbleed;
-        drawerLayout.hasScrollingRegion = hasScrollingRegion;
-        drawerLayout.responsiveWidth = responsiveWidth;
-        drawerLayout.forceNarrow = forceNarrow;
+  const updateAttributes = () => {
+    const drawerLayoutNode = (element.current as any)
+    const drawerLayout = drawerLayoutNode?.mdkDrawerLayout;
+    drawerLayout.push = push;
+    drawerLayout.fullbleed = fullbleed;
+    drawerLayout.hasScrollingRegion = hasScrollingRegion;
+    drawerLayout.responsiveWidth = responsiveWidth;
+    drawerLayout.forceNarrow = forceNarrow;
+  }
+
+  useEffect(() => {
+    const drawerLayoutNode = (element.current as any)
+
+    drawerLayoutNode?.addEventListener(EVENT_UPGRADED, updateAttributes)
+    handler.upgradeElement(drawerLayoutNode, 'mdk-drawer-layout');
+
+    return () => {
+      handler.downgradeElement(drawerLayoutNode, 'mdk-drawer-layout');
+      drawerLayoutNode?.removeEventListener(EVENT_UPGRADED, updateAttributes)
     }
+  }, []);
 
-    useEffect(() => {
-        const drawerLayoutNode = (element.current as any)
+  useEffect(() => {
+    updateAttributes();
+  }, [push, fullbleed, hasScrollingRegion, responsiveWidth, forceNarrow]);
 
-        drawerLayoutNode?.addEventListener(EVENT_UPGRADED, updateAttributes)
-        handler.upgradeElement(drawerLayoutNode, 'mdk-drawer-layout');
-
-        return () => {
-            handler.downgradeElement(drawerLayoutNode, 'mdk-drawer-layout');
-            drawerLayoutNode?.removeEventListener(EVENT_UPGRADED, updateAttributes)
+  return (
+    <div
+      ref={element}
+      data-push={push}
+      data-responsive-width={responsiveWidth}
+      //@ts-ignore
+      fullbleed={fullbleed}
+      className="mdk-drawer-layout js-mdk-drawer-layout"
+    >
+      <div
+        id={contentId}
+        className={`mdk-drawer-layout__content ${contentClass || ''}`}
+      >
+        {hasScrollingRegion ?
+          <PerfectScrollbar>
+            {children}
+          </PerfectScrollbar> :
+          children
         }
-    }, []);
-
-    useEffect(() => {
-        updateAttributes();
-    }, [push, fullbleed, hasScrollingRegion, responsiveWidth, forceNarrow]);
-
-    return (
-        <div
-            ref={element}
-            data-push={push}
-            data-responsive-width={responsiveWidth}
-            //@ts-ignore
-            fullbleed={fullbleed}
-            className="mdk-drawer-layout js-mdk-drawer-layout"
-        >
-            <div
-                id={contentId}
-                className={`mdk-drawer-layout__content ${contentClass || ''}`}
-
-            >
-                {hasScrollingRegion ?
-                    <PerfectScrollbar>
-                        {children}
-                    </PerfectScrollbar> :
-                    children
-                }
-            </div>
-            <Drawer
-                ref={ref}
-                id={drawerId}
-                align={drawerAlign}
-                persistent={drawerPersistent}
-                contentClass={drawerContentClass}
-                opened={drawerOpened}
-                classes={drawerClasses}
-            >
-                {!!renderDrawerContent && renderDrawerContent()}
-            </Drawer>
-        </div>
-    );
+      </div>
+      <Drawer
+        ref={ref}
+        id={drawerId}
+        align={drawerAlign}
+        persistent={drawerPersistent}
+        contentClass={drawerContentClass}
+        opened={drawerOpened}
+        classes={drawerClasses}
+      >
+        {!!renderDrawerContent && renderDrawerContent()}
+      </Drawer>
+    </div>
+  );
 })
 
 export default DrawerLayout;
