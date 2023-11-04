@@ -15,6 +15,7 @@ const Home = () => {
             <Link to={'/fixed-header'}>Example of a Fixed Header</Link>
             <Link to={'/header-layout'}>Example of a Header Layout</Link>
             <Link to={'/sidebar-menu'}>Example of a Sidebar Menu</Link>
+            <Link to={'/sidebar-menu-react'}>Example of a Sidebar Menu React</Link>
         </div>
     );
 }

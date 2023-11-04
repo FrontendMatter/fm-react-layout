@@ -13,10 +13,15 @@ import BasicHeaderLayout from "./pages/basic-header-layout";
 import DrawerLayoutWithHeaderLayout from "./pages/drawer-layout-with-header-layout";
 import DrawerLayoutForceNarrow from "./pages/drawer-layout-force-narrow";
 import SidebarMenu from "./pages/sidebar-menu";
+import SidebarMenuReactExample from "./pages/sidebar-menu-react-example";
 
 const router = createBrowserRouter([
     {
         path: "/",
+        element: <Home />,
+    },
+    {
+        path: "/home",
         element: <Home />,
     },
     {
@@ -54,6 +59,10 @@ const router = createBrowserRouter([
     {
         path: "/sidebar-menu",
         element: <SidebarMenu />,
+    },
+    {
+        path: "/sidebar-menu-react",
+        element: <SidebarMenuReactExample />,
     },
 ]);
 function App() {
