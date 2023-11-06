@@ -6,7 +6,6 @@ export type SubMenuItem = {
     click?: () => void;
 }
 
-
 export type Item = {
     id: string;
     label: string;
@@ -25,4 +24,5 @@ export type Item = {
 
 export interface SidebarMenuProps {
     items: Item[],
+    route: string,
 }

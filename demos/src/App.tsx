@@ -64,6 +64,10 @@ const router = createBrowserRouter([
         path: "/sidebar-menu-react",
         element: <SidebarMenuReactExample />,
     },
+    ...["/side-id1", "/side-id2", "/side-id3", "/side-id4", "/side-id5"].map(path => ({
+        path: path,
+        element: <SidebarMenuReactExample />
+    })),
 ]);
 function App() {
     return (

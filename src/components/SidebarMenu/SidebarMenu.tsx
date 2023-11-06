@@ -33,11 +33,12 @@ const Item = (props: Item) => {
         label,
         icon,
         active,
+        open,
         route,
         children,
     } = props;
 
-    const [open, setOpen] = useState(false);
+    const [opened, setOpen] = useState(open);
 
     return (
         <>
@@ -60,7 +61,7 @@ const Item = (props: Item) => {
                             <span className="sidebar-menu-toggle-icon ms-auto"></span>
                         </a>
 
-                        <Collapse in={open} dimension="height">
+                        <Collapse in={opened} dimension="height">
                             <ul className="sidebar-submenu">
                                 {
                                     children.map(item => (
@@ -91,15 +92,30 @@ const Item = (props: Item) => {
         </>
     )
 }
-
+const setActiveAndOpenedItems = (items: Item[], route: string) => {
+    items.forEach(item => {
+        if(item.children !== undefined && item.children?.length) {
+            //@ts-ignore
+            const child = item.children.findIndex((child: SubMenuItem) => child.route === route);
+            if(child >= 0){
+                item.children[child].active = true;
+                item.open = true
+            }
+        } else {
+            if(item.route === route){
+                item.active = true;
+            }
+        }
+    })
+}
 
 const SidebarMenu = (props: SidebarMenuProps) => {
-
     const {
         items,
-
+        route
     } = props
-    console.log(items);
+
+    setActiveAndOpenedItems(items, route);
 
     return (
         <div className="sidebar sidebar-left sidebar-light">
