@@ -13,7 +13,7 @@ const SubMenuItem = (props: SubMenuItem) => {
     } = props;
 
     return (
-        <li className={
+        <li key={label} className={
             classNames('sidebar-menu-item', {
                 "active": active,
             })
@@ -31,7 +31,7 @@ const Item = (props: Item) => {
     const {
         id,
         label,
-        renderIcon,
+        icon,
         active,
         route,
         children,
@@ -43,9 +43,12 @@ const Item = (props: Item) => {
         <>
             {
                 (children !== undefined && children?.length) ?
-                    <li onClick={() => setOpen(prev => !prev)} className={
+                    <li key={id} onClick={(e) => {
+                        setOpen(prev => !prev);
+                        e.stopPropagation();
+                    }} className={
                         classNames('sidebar-menu-item', {
-                            "active": active,
+                            "open": open,
                         })
                     }>
                         <a
@@ -55,21 +58,19 @@ const Item = (props: Item) => {
                         >
                             <span className="sidebar-menu-text">{label}</span>
                             <span className="sidebar-menu-toggle-icon ms-auto"></span>
-
-                            <Collapse in={open}>
-                                <ul className="sidebar-submenu">
-                                    {
-                                        children.map(item => (
-                                            <SubMenuItem {...item} />
-                                        ))
-                                    }
-                                </ul>
-                            </Collapse>
-
-
                         </a>
+
+                        <Collapse in={open} dimension="height">
+                            <ul className="sidebar-submenu">
+                                {
+                                    children.map(item => (
+                                        <SubMenuItem {...item} />
+                                    ))
+                                }
+                            </ul>
+                        </Collapse>
                     </li> :
-                    <li className={
+                    <li key={id} className={
                         classNames('sidebar-menu-item', {
                             "active": active,
                         })
@@ -79,7 +80,10 @@ const Item = (props: Item) => {
                             href={route}
                             id={id}
                         >
-                            {!!renderIcon && renderIcon()}
+                            {!!icon && React.createElement(icon.type, {
+                                ...icon.props,
+                                className: `sidebar-menu-icon sidebar-menu-icon--left ${icon?.props?.className}`
+                            })}
                             <span className="sidebar-menu-text">{label}</span>
                         </a>
                     </li>

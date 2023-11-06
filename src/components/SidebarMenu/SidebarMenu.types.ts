@@ -10,7 +10,7 @@ export type SubMenuItem = {
 export type Item = {
     id: string;
     label: string;
-    renderIcon?: () => React.ReactNode;
+    icon?: React.ReactNode;
     badge?: {
         label: string;
         variant: string;
