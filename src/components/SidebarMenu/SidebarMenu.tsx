@@ -60,9 +60,8 @@ const Item = (props: Item) => {
                             <span className="sidebar-menu-text">{label}</span>
                             <span className="sidebar-menu-toggle-icon ms-auto"></span>
                         </a>
-
                         <Collapse in={opened} dimension="height">
-                            <ul className="sidebar-submenu">
+                            <ul className="sidebar-submenu-class">
                                 {
                                     children.map(item => (
                                         <SubMenuItem {...item} />
